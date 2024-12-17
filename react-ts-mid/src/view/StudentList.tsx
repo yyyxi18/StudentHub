@@ -6,9 +6,10 @@ import { Student } from "../interface/Student";
 */
 interface StudentListProps {
   students: Student[];
+  onDelete: (id: string) => void; // 將刪除功能作為 props 傳入
 }
 
-const StudentList: React.FC<StudentListProps> = ({ students }) => {
+const StudentList: React.FC<StudentListProps> = ({ students, onDelete }) => {
   return (
     <div className="container">
       {students.map((student) => (
@@ -21,6 +22,12 @@ const StudentList: React.FC<StudentListProps> = ({ students }) => {
           <p><strong>班級：</strong>{student.class}</p>
           <p><strong>Email：</strong>{student.email}</p>
           <p><strong>缺席次數：</strong>{student.absences ?? 0}</p>
+
+          {/* 刪除與編輯按鈕 */}
+          <div className="action-buttons">
+            <button className="edit">編輯</button>
+            <button className="delete" onClick={() => onDelete(student._id)}>刪除</button>
+          </div>
         </div>
       ))}
     </div>

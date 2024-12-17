@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import '../style/app.css'
-import { asyncGet, asyncPost } from '../utils/fetch'
+import { asyncDelete, asyncGet, asyncPost } from '../utils/fetch'
 import { api } from '../enum/api'
 import { Student } from '../interface/Student'
 import { resp } from '../interface/resp'
@@ -38,6 +38,18 @@ const App: React.FC = () => {
     }
   };
 
+  // 刪除學生處理
+  const deleteStudentHandler = async (id: string) => {
+    try {
+      const response = await asyncDelete(`${api.DeleteById}/${id}`); // 假設後端 API 支援根據 ID 刪除學生
+      console.log("刪除學生成功:", response);
+      setStudentsList((prev) => prev.filter((student) => student._id !== id)); // 從列表中移除學生
+    } catch (error) {
+      console.error("刪除學生失敗:", error);
+    }
+  };
+  console.log("傳遞給 StudentList 的刪除函數:", deleteStudentHandler);
+
   /**
    * dom: 從index.html裡面拖出來
    */
@@ -46,8 +58,8 @@ const App: React.FC = () => {
       <h1>歡迎使用 StudentHub！</h1>
       {/* 傳遞新增學生的處理函數給 AddStudentForm */}
       <AddStudentForm onSubmit={addStudentHandler} />
-      {/* 傳遞學生列表資料給 StudentList */}
-      <StudentList students={studentsList} />
+      {/* 傳遞學生列表資料與刪除函數給 StudentList */}
+      <StudentList students={studentsList} onDelete={deleteStudentHandler} />
     </div>
   )
 };

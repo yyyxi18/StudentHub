@@ -22,6 +22,18 @@
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: left; /* 卡片內文字左對齊 */
+  transition: transform 0.2s, box-shadow 0.2s; /* 添加動畫過渡效果 */
+  position: relative; /* 確保子元素 (按鈕) 位置相對於父元素 */
+}
+
+.container .student:hover {
+  transform: translateY(-5px); /* 懸停時框框浮起 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 增加陰影效果 */
+}
+
+.container .student.selected {
+  background-color: #e6f7ff; /* 選中學生時的背景色 */
+  border-color: #1890ff;
 }
 
 .container .student p {
@@ -30,6 +42,18 @@
 
 .container .student strong {
   font-weight: bold;
+}
+
+.container .student .action-buttons {
+  display: none; /* 預設隱藏按鈕 */
+  position: absolute; /* 按鈕絕對定位 */
+  bottom: 1rem;
+  right: 1rem;
+  gap: 0.5rem;
+}
+
+.container .student:hover .action-buttons {
+  display: flex; /* 懸停時顯示按鈕 */
 }
 
 input {
@@ -48,8 +72,17 @@ button {
   color: #fff;
   cursor: pointer;
   font-size: 1rem;
+  transition: background-color 0.2s; /* 添加按鈕過渡效果 */
 }
 
 button:hover {
   background-color: #0056b3;
+}
+
+button.delete {
+  background-color: #ff4d4f; /* 刪除按鈕顏色 */
+}
+
+button.delete:hover {
+  background-color: #d32f2f;
 }

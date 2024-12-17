@@ -65,7 +65,7 @@ export class UserController extends Contorller {
         } catch (error) {
             // 若有錯誤，回傳錯誤訊息
             console.error("新增學生資料時出錯: ", error);
-        
+
             // 進行類型檢查，確保 error 是 Error 物件
             if (error instanceof Error) {
                 Response.status(500).send({
@@ -82,13 +82,16 @@ export class UserController extends Contorller {
                 });
             }
         }
-        
+
     }
 
     public async deleteById(Request: Request, Response: Response) {
-        const resp = await this.service.deleteById(Request.query.id as string)
-        Response.status(resp.code).send(resp)
+        const { id } = Request.params;  // 從路由參數中獲取 id
+        const resp = await this.service.deleteById(id);
+        Response.status(resp.code).send(resp);
     }
+
+
 
     public async updateNameById(Request: Request, Response: Response) {
         const resp = await this.service.updateNameById(Request.body.id, Request.body.id)

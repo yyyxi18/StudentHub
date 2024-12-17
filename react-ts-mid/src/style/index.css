@@ -1,22 +1,81 @@
-*{
-  padding: 0px;
-  margin: 0px;
-}
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: #212121;
 }
 
-body {
-  margin: 0;
+.container {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start; /* 卡片左對齊 */
+}
+
+.container .student {
+  border: solid 1px #212121;
+  border-radius: 0.3rem;
+  width: 18rem; /* 調整卡片寬度 */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left; /* 文字左對齊 */
+  background-color: #fff; /* 背景色 */
+}
+
+.container .student p {
+  margin: 0.25rem 0; /* 適當縮小段落間距 */
+}
+
+.container .student strong {
+  font-weight: bold;
+}
+
+/* 搜尋與輸入框樣式 */
+input {
+  margin: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.3rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 0.3rem;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* 頁面標題樣式 */
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* 表格樣式 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+th {
+  background-color: #f4f4f4;
 }

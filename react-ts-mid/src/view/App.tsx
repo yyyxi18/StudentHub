@@ -6,6 +6,8 @@ import { Student } from '../interface/Student'
 import { resp } from '../interface/resp'
 import AddStudentForm from './AddStudentForm'
 import StudentList from './StudentList'
+import axios from "axios";
+
 
 const App: React.FC = () => {
   /**
@@ -18,7 +20,7 @@ const App: React.FC = () => {
   useEffect(() => {
     asyncGet(api.findAll).then((res: resp<Array<Student>>) => {
       if (res && res.code === 200) {
-        setStudentsList(res.body);
+        setStudentsList(res.body); //設置學生列表
       }
     });
   }, []);
@@ -42,44 +44,13 @@ const App: React.FC = () => {
   return (
     <div className="home">
       <h1>歡迎使用 StudentHub！</h1>
-      <StudentList students={studentsList} />
+      {/* 傳遞新增學生的處理函數給 AddStudentForm */}
       <AddStudentForm onSubmit={addStudentHandler} />
-      <table>
-        <thead>
-          <tr>
-            <th>帳號</th>
-            <th>座號</th>
-            <th>姓名</th>
-            <th>院系</th>
-            <th>年級</th>
-            <th>班級</th>
-            <th>Email</th>
-            <th>缺席次數</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <tbody id="studentsList">
-        </tbody>
-      </table>
+      {/* 傳遞學生列表資料給 StudentList */}
+      <StudentList students={studentsList} />
     </div>
   )
 };
 export default App;
 
 
-/**
-  * 處理新增按鈕
-  
- const submitHandler = async () => {
-   const randomAbsences = Math.floor(Math.random() * 10); // 隨機生成 0 到 9 的數值
-   const newStudent = {
-     userName: (document.getElementById("newAccount") as HTMLInputElement).value,
-     sid: parseInt((document.getElementById("newSeatNo") as HTMLInputElement).value),
-     name: (document.getElementById("newName") as HTMLInputElement).value,
-     department: (document.getElementById("newDepartment") as HTMLInputElement).value,
-     grade: ((document.getElementById("newGrade") as HTMLInputElement).value),
-     class: (document.getElementById("newClass") as HTMLInputElement).value,
-     email: (document.getElementById("newEmail") as HTMLInputElement).value,
-     absences: randomAbsences, // 使用隨機數值
-     const response = await asyncPost(api.insertOne, newStudent);
-   }*/

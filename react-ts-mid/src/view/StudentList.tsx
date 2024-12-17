@@ -1,4 +1,5 @@
 import React from "react";
+import '../style/app.css'
 import { Student } from "../interface/Student";
 /**
 * 渲染列表
@@ -9,7 +10,7 @@ interface StudentListProps {
 
 const StudentList: React.FC<StudentListProps> = ({ students }) => {
   return (
-    <>
+    <div className="container">
       {students.map((student) => (
         <div className="student" key={student._id}>
           <p><strong>帳號：</strong>{student.userName}</p>
@@ -22,7 +23,7 @@ const StudentList: React.FC<StudentListProps> = ({ students }) => {
           <p><strong>缺席次數：</strong>{student.absences ?? 0}</p>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

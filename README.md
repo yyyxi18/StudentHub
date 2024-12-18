@@ -2,57 +2,75 @@
 
 StudentHub 是一個學生管理系統，提供用戶友善的介面來管理學生資料，包括新增、查詢、更新與刪除功能。本系統採用前後端分離架構，並整合資料庫來儲存學生資訊。
 
-## 1. 安裝與執行指引
+## 安裝與執行指引
 
 ### 前置需求
 - Node.js (版本 >= 16)
 - MongoDB (版本 >= 4.4)
-- 安裝 `npm` 或 `yarn` 工具
+- 安裝 `npm`工具
 
 ### 安裝步驟
-1. 克隆專案到本地：
+1. git clone專案到本地：
    ```bash
-   git clone https://github.com/your-repo/StudentHub.git
+   git clone https://github.com/yyyxi18/StudentHub.git
    cd StudentHub
    ```
 
 2. 安裝後端依賴：
    ```bash
-   cd server
+   cd mongoDemo
    npm install
+   npm run dev
    ```
 
 3. 安裝前端依賴：
    ```bash
-   cd ../client
+   cd react-ts-mid
    npm install
+   npm run dev
    ```
 
-### 啟動系統
-1. 啟動 MongoDB：
-   確保本地 MongoDB 正在運行，或根據 `.env` 文件中的設定連接到遠端 MongoDB。
+### 關於資料庫
+1. 打開Docker，打開MongoDB Compass：
+   根據 `.env` 文件中的設定連接到遠端 MongoDB。
 
 2. 啟動後端：
    ```bash
-   cd server
-   npm run start
+   npm run dev
    ```
-   後端服務將啟動於 `http://localhost:8877`
+   log日誌顯示連線成功的消息：
+   ```bash
+   info: Dec-18-2024 02:34:30: 	listening on *:8877
+   info: Dec-18-2024 02:34:30: 	suscess: connet to mongoDB @mongodb://yyyxi:yyyxi411631269@127.0.0.1:27017/411631269
+  ```
 
 3. 啟動前端：
    ```bash
-   cd ../client
-   npm run start
+   npm run dev
    ```
-   前端服務將啟動於 `http://localhost:5173`
+   顯示：
+   ```bash
+   > my-react-app@0.0.0 dev
+   > vite
 
-4. 使用瀏覽器訪問 `http://localhost:5173` 查看系統。
+   Port 5173 is in use, trying another one...
+   Port 5174 is in use, trying another one...
+
+   VITE v5.4.10  ready in 726 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+  ```
+
+  4. 前往瀏覽器查看 `http://localhost:5173/`
 
 ---
 
-## 2. API 規格說明
-
+## API 規格說明
+`mongoDemo/src/Service/UserService.ts`
 ### 1. 查詢所有學生資料
+
 **請求方式**: `GET`
 
 **端點**: `/api/v1/user/findAll`
@@ -64,14 +82,14 @@ StudentHub 是一個學生管理系統，提供用戶友善的介面來管理學
   "message": "find success",
   "body": [
     {
-      "id": "123456",
-      "userName": "john_doe",
-      "name": "John Doe",
-      "department": "Computer Science",
-      "grade": "Sophomore",
-      "class": "A",
-      "email": "john@example.com",
-      "absences": 0
+      "_id": "6759060c8080b5e17e4d101d",
+            "userName": "tkuee0787",
+            "sid": "1",
+            "name": "張佳慧",
+            "department": "電機工程系",
+            "grade": "四年級",
+            "class": "A",
+            "Email": "tkuee0787@tkuim.com"
     }
   ]
 }
@@ -85,12 +103,12 @@ StudentHub 是一個學生管理系統，提供用戶友善的介面來管理學
 **請求 Body**:
 ```json
 {
-  "userName": "jane_doe",
-  "name": "Jane Doe",
-  "department": "Information Management",
-  "grade": "Junior",
-  "class": "B",
-  "email": "jane@example.com"
+  "userName": "tkuim8765",
+  "name": "姚育祺",
+  "department": "資訊管理學系",
+  "grade": "三",
+  "class": "C",
+  "email": "yaoyuci@gmail.com"
 }
 ```
 
@@ -98,32 +116,37 @@ StudentHub 是一個學生管理系統，提供用戶友善的介面來管理學
 ```json
 {
   "code": 200,
-  "message": "新增成功",
-  "body": {
-    "id": "67890",
-    "userName": "jane_doe",
-    "name": "Jane Doe",
-    "department": "Information Management",
-    "grade": "Junior",
-    "class": "B",
-    "email": "jane@example.com",
-    "absences": 0
+    "message": "",
+    "body": {
+        "userName": "tkuim8765",
+        "sid": "54",
+        "name": "姚育祺",
+        "department": "資訊管理學系",
+        "grade": "三",
+        "class": "C",
+        "Email": "yaoyuci@gmail.com",
+        "absences": 0,
+        "_id": "67622a45f7ab6cd3084cf8a8",
+        "__v": 0
   }
 }
 ```
 
-### 3. 刪除學生資料（透過 userName）
+### 3. 刪除學生資料（透過 id）
 **請求方式**: `DELETE`
 
-**端點**: `/api/v1/user/deleteById/:userName`
+**端點**: `/api/v1/user/deleteById`
 
 **回應範例**:
 - 成功刪除
   ```json
   {
     "code": 200,
-    "message": "刪除成功",
-    "body": null
+    "message": "sucess",
+    "body": {
+        "acknowledged": true,
+        "deletedCount": 0
+    }
   }
   ```
 

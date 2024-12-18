@@ -41,14 +41,14 @@ const App: React.FC = () => {
   // 刪除學生處理
   const deleteStudentHandler = async (id: string) => {
     try {
-      const response = await asyncDelete(`${api.DeleteById}/${id}`); // 假設後端 API 支援根據 ID 刪除學生
+      const response = await asyncDelete(`${api.DeleteByUserName}/${id}`); // 假設後端 API 支援根據 ID 刪除學生
       console.log("刪除學生成功:", response);
       setStudentsList((prev) => prev.filter((student) => student._id !== id)); // 從列表中移除學生
     } catch (error) {
       console.error("刪除學生失敗:", error);
     }
   };
-  console.log("傳遞給 StudentList 的刪除函數:", deleteStudentHandler);
+console.log("傳遞給 StudentList 的刪除函數:", deleteStudentHandler);
 
   /**
    * dom: 從index.html裡面拖出來

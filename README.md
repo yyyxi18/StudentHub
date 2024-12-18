@@ -48,6 +48,7 @@ StudentHub 是一個學生管理系統，提供用戶友善的介面來管理學
    ```bash
    npm run dev
    ```
+
    顯示：
    ```bash
    > my-react-app@0.0.0 dev
@@ -98,7 +99,7 @@ StudentHub 是一個學生管理系統，提供用戶友善的介面來管理學
 ### 2. 新增學生資料
 **請求方式**: `POST`
 
-**端點**: `/api/v1/user/insertOne`
+**端點**： `/api/v1/user/insertOne`
 
 **請求 Body**:
 ```json
@@ -133,9 +134,9 @@ StudentHub 是一個學生管理系統，提供用戶友善的介面來管理學
 ```
 
 ### 3. 刪除學生資料（透過 id）
-**請求方式**: `DELETE`
+**請求方式**： `DELETE`
 
-**端點**: `/api/v1/user/deleteById`
+**端點**： `/api/v1/user/deleteById`
 
 **回應範例**:
 - 成功刪除

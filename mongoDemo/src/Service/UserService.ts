@@ -75,21 +75,34 @@ export class UserService extends Service {
      * @returns resp<any>
      */
 
-    public async deleteById(id: string) {
-
+    public async deleteById(id: string): Promise<resp<any>> {
         const resp: resp<any> = {
             code: 200,
             message: "",
-            body: undefined
-        }
+            body:
+            {
+                acknowledged: false,
+                deletedCount: 0,
+            },
+
+        };
 
         try {
-            const res = await studentsModel.deleteOne({ _id: id });
-            resp.message = "sucess";
-            resp.body = res;
+            const result = await studentsModel.deleteOne({ _id: id });
+            resp.body = {
+                acknowledged: result.acknowledged || true,
+                deletedCount: result.deletedCount || 0,
+            };
+
+            if (resp.body.deletedCount === 0) {
+                resp.code = 404;
+                resp.message = "No student found with the provided ID";
+            } else {
+                resp.message = "success";
+            }
         } catch (error) {
-            resp.message = error as string;
             resp.code = 500;
+            resp.message = `Server error: ${error}`;
         }
         return resp;
     }

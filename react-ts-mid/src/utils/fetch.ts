@@ -67,3 +67,37 @@ export const asyncDelete = async (api: string): Promise<any> => {
     throw error;
   }
 };
+
+/**
+ * 發送 PUT 請求
+ * @param api 要呼叫的 API
+ * @param body 要傳遞的資料 (JSON 或 FormData)
+ * @returns JSON 結果
+ */
+export const asyncPut = async (api: string, body: {} | FormData): Promise<any> => {
+  try {
+    const res: Response = await fetch(api, {
+      method: "PUT",
+      headers: new Headers({
+        "Access-Control-Allow-Origin": "http://localhost:5173/",
+        "Content-Type": body instanceof FormData ? "multipart/form-data" : "application/json",
+      }),
+      body: body instanceof FormData ? body : JSON.stringify(body),
+      mode: "cors",
+    });
+
+    if (res.ok) {
+      try {
+        return await res.json(); // 成功解析 JSON
+      } catch (error) {
+        console.error("JSON 解析失敗:", error);
+        throw error; // 解析失敗時拋出錯誤
+      }
+    } else {
+      throw new Error(`HTTP Error: ${res.status}`); // 處理非 2xx 狀態碼
+    }
+  } catch (error) {
+    console.error("PUT 請求失敗:", error);
+    throw error; // 拋出請求失敗錯誤
+  }
+};

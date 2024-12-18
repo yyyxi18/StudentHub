@@ -30,7 +30,7 @@ const DeleteStudent: React.FC<DeleteStudentProps> = ({
   // 刪除學生資料
   const deleteStudent = async (id: string) => {
     try {
-      await axios.delete(`http://127.0.0.1:8877/api/v1/user/deleteById`, {
+      await axios.delete(`http://127.0.0.1:8877/api/v1/user/deleteByUserName`, {
         params: { id },
       });
       // 刪除成功後，更新學生列表

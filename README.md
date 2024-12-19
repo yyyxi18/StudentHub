@@ -199,5 +199,5 @@ StudentHub 是一個學生管理系統，提供用戶友善的介面來管理學
 ## 操作影片
 
 ```bash
-[1.操作影片](https://youtu.be/0XFuaKH8_PQ)
+![1.操作影片](<https://youtu.be/0XFuaKH8_PQ>)
 ```

@@ -70,7 +70,7 @@ StudentHub 是一個學生管理系統，提供用戶友善的介面來管理學
 
 ## API 規格說明
 `mongoDemo/src/Service/UserService.ts`
-### 1. 查詢所有學生資料
+### 1. 查詢所有學生資料(取得所有資料，並按照座號排序)
 
 **請求方式**: `GET`
 
@@ -133,7 +133,7 @@ StudentHub 是一個學生管理系統，提供用戶友善的介面來管理學
 }
 ```
 
-### 3. 刪除學生資料（透過 id）
+### 3. 刪除學生資料（透過 id刪除學生）
 **請求方式**： `DELETE`
 
 **端點**： `/api/v1/user/deleteById`
@@ -151,16 +151,7 @@ StudentHub 是一個學生管理系統，提供用戶友善的介面來管理學
   }
   ```
 
-- 找不到學生
-  ```json
-  {
-    "code": 404,
-    "message": "找不到該學生資料",
-    "body": null
-  }
-  ```
-
-### 4. 更新學生名稱（透過 ID）
+### 4. 更新學生名稱（透過id索引編輯學生資料）
 **請求方式**: `PUT`
 
 **端點**: `/api/v1/user/updateNameById`
@@ -168,73 +159,39 @@ StudentHub 是一個學生管理系統，提供用戶友善的介面來管理學
 **請求 Body**:
 ```json
 {
-  "id": "123456",
-  "name": "John Smith"
+    "id": "67618b31de2a3d02cddbd931",
+    "name":"TEST"
 }
 ```
 
 **回應範例**:
 ```json
 {
-  "code": 200,
-  "message": "更新成功",
-  "body": {
-    "id": "123456",
-    "name": "John Smith"
-  }
+    "code": 200,
+    "message": " update sucess",
+    "body": {
+        "_id": "67618b31de2a3d02cddbd931",
+        "userName": "tkuim9999",
+        "sid": "53",
+        "name": "TEST",
+        "department": "資訊管理學系",
+        "grade": "三",
+        "class": "C",
+        "Email": "yaoyuci@gmail.com",
+        "absences": 0,
+        "__v": 0
+    }
 }
 ```
 
 ---
 
-## 3. 架構圖
+## 架構圖/流程圖
 
-```plaintext
-+--------------------+          +--------------------+
-|      Frontend      |          |      Backend       |
-| (React + Vite)     | <------> | (Node.js + Express)|
-+--------------------+          +--------------------+
-          |                              |
-          v                              v
-+--------------------+          +--------------------+
-|      Database      | <------> |    Service Layer   |
-| (MongoDB)          |          |                    |
-+--------------------+          +--------------------+
-```
+![架構圖/流程圖](./image.jpg)
 
-- **Frontend**: 提供用戶介面與使用者互動。
-- **Backend**: 提供 API 服務，包含學生資料的 CRUD 操作。
-- **Database**: 儲存學生資料。
+- **前端react-ts-mid**: 提供用戶介面與使用者互動。
+- **後端mongoDemo**: 提供 API 服務，包含學生資料的 CRUD 操作。
+- **資料庫**: 儲存學生資料。
 
 ---
-
-## 4. 流程圖
-
-以下是 CRUD 功能的操作流程：
-
-### 新增學生
-```plaintext
-[User] ---> [Frontend] ---> [Backend (POST /insertOne)] ---> [Database]
-```
-
-### 查詢學生資料
-```plaintext
-[User] ---> [Frontend] ---> [Backend (GET /findAll)] ---> [Database]
-                                ^                       |
-                                |<----------------------+
-```
-
-### 更新學生名稱
-```plaintext
-[User] ---> [Frontend] ---> [Backend (PUT /updateNameById)] ---> [Database]
-                                ^                             |
-                                |<---------------------------+
-```
-
-### 刪除學生
-```plaintext
-[User] ---> [Frontend] ---> [Backend (DELETE /deleteById/:userName)] ---> [Database]
-                                ^                                      |
-                                |<------------------------------------+
-```
-

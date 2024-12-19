@@ -125,6 +125,7 @@ export class UserService extends Service {
 
         const user = await studentsModel.findById(id)
         if (user) {
+            console.log(user);
             try {
                 user.name = name;
                 await user.save();

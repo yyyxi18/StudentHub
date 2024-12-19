@@ -39,9 +39,9 @@ const UpdateStudent: React.FC<UpdateStudentProps> = ({
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
-      await axios.put(`http://127.0.0.1:8877/api/v1/user/updateNameById`, formData);
+      await axios.put(`http://127.0.0.1:8877/api/v1/user/updateNameById`, {id:formData._id,name:formData.userName});
       alert("修改成功！");
-      onUpdateSuccess(); // 調用回調，返回到主頁或刷新列表
+    //   onUpdateSuccess(); // 調用回調，返回到主頁或刷新列表
     } catch (error) {
       console.error("修改失敗:", error);
       alert("修改失敗！");

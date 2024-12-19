@@ -85,16 +85,13 @@ export class UserController extends Contorller {
 
     }
 
-    public async deleteById(Request: Request, Response: Response) {
-        const { id } = Request.params;  // 從路由參數中獲取 id
-        const resp = await this.service.deleteById(id);
-        Response.status(resp.code).send(resp);
+    public async deleteByID(Request:Request , Response:Response) {
+        const resp = await this.service.deleteById(Request.query.id as string)
+        Response.status(resp.code).send(resp)
     }
 
-
-
     public async updateNameById(Request: Request, Response: Response) {
-        const resp = await this.service.updateNameById(Request.body.id, Request.body.id)
+        const resp = await this.service.updateNameById(Request.body.id, Request.body.name)
         Response.status(resp.code).send(resp)
     }
 }

@@ -1,9 +1,9 @@
 import express from 'express'
 import {router} from "./Routers"
-import { logger } from './middlewares/log';
+import { logger } from '../middlewares/log';
 const http = require('http');
 import cors from 'cors';
-import { MongoDB } from './utils/MongoDB';
+import { MongoDB } from '../utils/MongoDB';
 require('dotenv').config()
 const app: express.Application = express()
 const server = http.createServer(app);

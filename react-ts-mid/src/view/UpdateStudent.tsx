@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../style/app.css"; // 確保樣式與 DeleteStudent.tsx 一致
+import { useNavigate } from "react-router";
 
 interface Student {
   _id: string;
@@ -16,32 +17,34 @@ interface Student {
 
 interface UpdateStudentProps {
   student: Student; // 傳入需要編輯的學生資料
-  onUpdateSuccess: () => void; // 修改成功後的回調函數
+  onUpdate: (student: Student) => void;
+  onCancel: () => void;
+  //onUpdateSuccess: () => void; // 修改成功後的回調函數
 }
 
-const UpdateStudent: React.FC<UpdateStudentProps> = ({
-  student,
-  onUpdateSuccess,
-}) => {
-  const [formData, setFormData] = useState<Student>(student);
+const UpdateStudent: React.FC<UpdateStudentProps> = ({ student }) => {
+  const navigate = useNavigate();
+  const [formData, onUpdate] = useState<Student>(student);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // 更新表單資料
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    onUpdate({
+      ...student,
+      [name]: name === 'absences' ? Number(value) || 0 : value, // 預設為 0
+    });
   };
 
   // 提交修改
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
-      await axios.put(`http://127.0.0.1:8877/api/v1/user/updateNameById`, {id:formData._id,name:formData.userName});
+      await axios.put(`http://127.0.0.1:8877/api/v1/user/updateNameById`, { id: formData._id, name: formData.userName });
       alert("修改成功！");
-    //   onUpdateSuccess(); // 調用回調，返回到主頁或刷新列表
+      //onUpdateSuccess(); // 這裡呼叫傳遞進來的回調函數
+      //window.history.back(); // 返回上一頁
+      navigate("S/student-list"); // 導向到 StudentList 頁面
     } catch (error) {
       console.error("修改失敗:", error);
       alert("修改失敗！");
@@ -49,6 +52,8 @@ const UpdateStudent: React.FC<UpdateStudentProps> = ({
       setIsSubmitting(false);
     }
   };
+
+  
 
   return (
     <div className="update-student">

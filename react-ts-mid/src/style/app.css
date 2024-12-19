@@ -86,3 +86,17 @@ button.delete {
 button.delete:hover {
   background-color: #d32f2f;
 }
+
+button.back {
+  background-color: #6c757d; /* 返回按鈕的背景色 */
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s; /* 添加按鈕過渡效果 */
+}
+
+button.back:hover {
+  background-color: #5a6268; /* 返回按鈕懸停時的顏色 */
+}

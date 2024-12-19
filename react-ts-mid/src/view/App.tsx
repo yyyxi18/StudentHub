@@ -43,7 +43,7 @@ const App: React.FC = () => {
   // 刪除學生處理
   const deleteStudentHandler = async (id: string) => {
     try {
-      const response = await asyncDelete(`${api.deleteByUserId}?id=${id}`); // 假設後端 API 支援根據 ID 刪除學生
+      const response = await asyncDelete(`${api.deleteById}?id=${id}`); // 假設後端 API 支援根據 ID 刪除學生
       console.log("刪除學生成功:", response);
       setStudentsList((prev) => prev.filter((student) => student._id !== id)); // 從列表中移除學生
     } catch (error) {
@@ -102,5 +102,3 @@ const editStudentHandler = (student: Student) => {
   )
 };
 export default App;
-
-

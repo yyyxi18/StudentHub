@@ -31,7 +31,7 @@ const DeleteStudent: React.FC<DeleteStudentProps> = ({
     // 刪除學生資料
     const deleteStudent = async (id: string) => {
         try {
-            await asyncDelete(`${api.deleteByUserId}?id=${id}`)
+            await asyncDelete(`${api.deleteById}?id=${id}`)
             // 刪除成功後，更新學生列表
             setStudents((prev) => prev.filter((student) => student._id !== id));
             alert("刪除成功！");

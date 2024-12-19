@@ -50,7 +50,7 @@ export class UserRoute extends Route {
         /**
          * 刪除學生
          */
-        this.router.delete(`${this.url}deleteByUserId`, (req, res) => {
+        this.router.delete(`${this.url}deleteById`, (req, res) => {
             this.Contorller.deleteByID(req, res);
         })
 
